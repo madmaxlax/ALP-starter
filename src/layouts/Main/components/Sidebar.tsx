@@ -1,30 +1,22 @@
-import { Drawer, DrawerProps } from '@material-ui/core';
+import { Drawer, DrawerProps, Grid } from '@material-ui/core';
+import { Apps, Home, LocationOn } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/styles';
-import clsx from 'clsx';
-import React from 'react';
+import React, { useState } from 'react';
 import { CustomTheme } from '../../../theme';
 import { ClassNameChildrenProps } from '../../../utils/types';
+import MenuButton from './MenuButton';
+
+const sidebarWidth = 100;
 
 const useStyles = makeStyles((theme: CustomTheme) => ({
   drawer: {
-    width: 240,
-    [theme.breakpoints.up('lg')]: {
-      marginTop: 64,
-      height: 'calc(100% - 64px)',
+    '&.MuiPaper-root': {
+      minHeight: '100vh',
+      width: sidebarWidth,
+      borderRight: 'none',
+      backgroundColor: theme.palette.primary.main,
+      color: theme.palette.primary.contrastText,
     },
-  },
-  root: {
-    backgroundColor: theme.palette.primary.main,
-    display: 'flex',
-    flexDirection: 'column',
-    height: '100%',
-    padding: theme.spacing(2),
-  },
-  divider: {
-    margin: theme.spacing(2, 0),
-  },
-  nav: {
-    marginBottom: theme.spacing(2),
   },
 }));
 
@@ -33,11 +25,32 @@ interface SidebarProps extends DrawerProps, ClassNameChildrenProps {}
 const Sidebar = (props: SidebarProps) => {
   const { open, variant, onClose, className, children } = props;
 
+  const [sidebarIsOpen, setSidebarIsOpen] = useState(true);
+
   const classes = useStyles();
 
   return (
-    <Drawer anchor="left" classes={{ paper: classes.drawer }} onClose={onClose} open={open} variant={variant}>
-      <div className={clsx(classes.root, className)}>{children}</div>
+    <Drawer
+      anchor="left"
+      classes={{ paper: classes.drawer }}
+      onClose={onClose}
+      open={open || sidebarIsOpen}
+      variant={variant || 'persistent'}
+      ModalProps={{
+        keepMounted: true, // Better open performance on mobile.
+      }}
+    >
+      {/* <Grid container direction="column" alignItems="stretch" justifyContent="space-between"> */}
+      <MenuButton active to="/main">
+        <Home />
+      </MenuButton>
+      <MenuButton to="/location">
+        <LocationOn />
+      </MenuButton>
+      <Grid item className="flex-grow"></Grid>
+      <MenuButton to="/location">
+        <Apps />
+      </MenuButton>
     </Drawer>
   );
 };

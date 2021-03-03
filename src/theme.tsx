@@ -9,23 +9,32 @@ export interface CustomTheme extends Theme {
   customValues: {
     primaryFontFamily: string;
     secondaryFontFamily: string;
-    customColor: string;
+    darkGrey: string;
+    lightGrey: string;
   };
 }
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#556cd6',
+      main: '#5a6770',
+      contrastText: '#ffffff',
     },
     secondary: {
-      main: '#19857b',
+      main: '#410199',
     },
     error: {
       main: red.A400,
     },
     background: {
-      default: '#fff',
+      default: '#f3f4f7',
+      paper: '#f3f4f7',
     },
+  },
+  typography: {
+    allVariants: {
+      color: '#444444',
+    },
+    //  fontFamily:''
   },
   components: {
     MuiButton: {
@@ -51,7 +60,8 @@ const theme = createMuiTheme({
 theme.customValues = {
   primaryFontFamily: 'Roboto',
   secondaryFontFamily: 'Arial',
-  customColor: 'green',
+  darkGrey: '#5a6770',
+  lightGrey: '#ffffff',
 };
 
 export default theme;
