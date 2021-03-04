@@ -12,7 +12,7 @@ import * as serviceWorker from './serviceWorker';
 import theme from './theme';
 
 const client = new ApolloClient({
-  uri: 'https://rickandmortyapi.com/graphql',
+  uri: 'https://wealthy-dragon-32.hasura.app/v1/graphql',
   cache: cacheMoney,
 });
 
@@ -27,7 +27,7 @@ ReactDOM.render(
       </Router>
     </ThemeProvider>
   </ApolloProvider>,
-  document.querySelector('#root')
+  document.querySelector('#root'),
 );
 
 // If you want your app to work offline and load faster, you can change

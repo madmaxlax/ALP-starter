@@ -1,9 +1,9 @@
 import { gql, useQuery } from '@apollo/client';
-import { Alert, AlertTitle, Card, CardContent, CardMedia, Container, Grid, Typography } from '@material-ui/core';
+import { Alert, AlertTitle, Card, CardContent, Container, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import React from 'react';
 import CustomCircularProgress from '../../components/CustomCircularProgress';
-import { Character } from '../../models/types';
+import { Job } from '../../models/GQL_models';
 import { CustomTheme } from '../../theme';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -21,22 +21,23 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
   },
 }));
 
-const CHARACTERS_QUERY = gql`
-  query myQuery {
-    characters {
-      results {
-        id
-        name
-        gender
-        image
-      }
+const SAMPLE_QUERY = gql`
+  query MyQuery {
+    jobs {
+      company
+      description
+      employmentType
+      id
+      location
+      position
+      skillsRequired
     }
   }
 `;
 
 export const MainPage = () => {
   const classes = useStyles();
-  const { error, data } = useQuery(CHARACTERS_QUERY, {
+  const { error, data } = useQuery(SAMPLE_QUERY, {
     onCompleted: (dat) => {
       console.log(dat);
     },
@@ -67,18 +68,22 @@ export const MainPage = () => {
                     </Alert>
                   ) : data ? (
                     <>
-                      <Typography variant="h6">Rick and Morty Characters</Typography>
-                      {data?.characters?.results.map((character: Character, index: number) => (
+                      <Typography variant="h6">Sample Query:</Typography>
+                      {data?.jobs?.map((job: Job, index: number) => (
                         <Card className={classes.recommendationCard} key={index}>
-                          <CardMedia
+                          {/* <CardMedia
                             component="img"
                             alt={character.name || ''}
                             height="140"
                             image={character.image || ''}
                             title={character.name || ''}
-                          />
+                          /> */}
                           <CardContent>
-                            {character.name}: {character.gender}
+                            <Typography variant="h6">
+                              {job.company}: {job.position}
+                            </Typography>
+                            <Typography variant="subtitle1">{job.employmentType}</Typography>
+                            <Typography>{job.skillsRequired?.map((skill) => skill + ', ')}</Typography>
                           </CardContent>
                         </Card>
                       ))}
