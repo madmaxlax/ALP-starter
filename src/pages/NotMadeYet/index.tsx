@@ -16,7 +16,7 @@ export const NotMadeYet = () => {
   return (
     <Grid container direction="row" justifyContent="center" alignItems="center" className={classes.root}>
       <Grid item>
-        <h1>Page Not Found!</h1>
+        <h1>{location.pathname.startsWith('/404-not-found') ? 'Page Not Found!' : 'Not Made yet'}</h1>
         <br />
 
         <Link to="/">Back Home</Link>

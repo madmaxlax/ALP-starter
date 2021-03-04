@@ -9,7 +9,7 @@ import { ClassNameChildrenProps } from '../../../utils/types';
 const useStyles = makeStyles((theme: CustomTheme) => ({
   buttonRoot: {
     '&.MuiButton-root': {
-      padding: theme.spacing(4, 4),
+      padding: theme.spacing(3, 3),
       backgroundColor: theme.palette.primary.main,
       color: theme.palette.secondary.contrastText,
       borderRadius: 0,
@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         backgroundColor: theme.palette.grey[800],
       },
       '& .MuiSvgIcon-root': {
-        fontSize: 30,
+        fontSize: 24,
       },
     },
   },

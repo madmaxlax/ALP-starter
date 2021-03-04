@@ -6,6 +6,8 @@ import { CustomTheme } from '../../theme';
 import { ClassNameChildrenProps } from '../../utils/types';
 import Sidebar from './components/Sidebar';
 
+const sidebarWidth = 72;
+
 const useStyles = makeStyles((theme: CustomTheme) => ({
   mainRoot: {
     minHeight: '100vh',
@@ -14,11 +16,11 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
     backgroundColor: theme.customValues.darkGrey,
     color: theme.customValues.lightGrey,
   },
-  content: { paddingTop: theme.spacing(10) },
+  content: { marginLeft: sidebarWidth },
 }));
 
 const Main = (props: ClassNameChildrenProps) => {
-  const { className, children, ...rest } = props;
+  const { className, children } = props;
   const classes = useStyles();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const params = useParams() as any;
@@ -26,9 +28,8 @@ const Main = (props: ClassNameChildrenProps) => {
 
   return (
     <div className={clsx(classes.mainRoot, className)}>
-      <Sidebar />
-      <img src={'/img/placeholder-topbar.png'} alt="topbarplaceholder" />
-      <main className={classes.content}>content</main>
+      <Sidebar width={sidebarWidth} />
+      <main className={classes.content}>{children}</main>
     </div>
   );
 };

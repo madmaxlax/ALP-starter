@@ -12,7 +12,9 @@ const Routes = () => {
     <Switch>
       <RouteWithLayout component={MinimalPage} exact layout={Minimal} layoutprops={{}} path={['/']} />
 
-      <RouteWithLayout component={MainPage} exact layout={Main} path="/main/:pageName" />
+      <RouteWithLayout component={MainPage} exact layout={Main} path={['/main', '/main/:pageName']} />
+      <RouteWithLayout component={NotMadeYet} exact layout={Main} path={['/notmadeyet', '/notmadeyet/:pageName']} />
+
       <RouteWithLayout component={NotMadeYet} exact layout={Minimal} layoutprops={{}} path="/404-not-found" />
       <Redirect
         to={{

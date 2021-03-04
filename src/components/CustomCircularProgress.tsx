@@ -1,15 +1,15 @@
-import { Box, CircularProgress, Typography } from '@material-ui/core';
+import { Box, CircularProgress, CircularProgressProps, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
 import React from 'react';
 import { CustomTheme } from '../theme';
-import { ClassNameProps } from '../utils/types';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const useStyles = makeStyles((theme: CustomTheme) => ({
-  circularProgressRoot: {},
+  circularProgressRoot: { textAlign: 'center' },
 }));
 
-interface GWCircularProgressProps extends ClassNameProps {
+interface GWCircularProgressProps extends CircularProgressProps {
   text?: string;
 }
 
