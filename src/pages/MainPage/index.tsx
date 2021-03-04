@@ -3,7 +3,7 @@ import { Alert, AlertTitle, Card, CardContent, Container, Grid, Typography } fro
 import { makeStyles } from '@material-ui/styles';
 import React from 'react';
 import CustomCircularProgress from '../../components/CustomCircularProgress';
-import { Job } from '../../models/GQL_models';
+import { Eanalytics_Orgs } from '../../models/GQLmodels';
 import { CustomTheme } from '../../theme';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -23,14 +23,14 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
 
 const SAMPLE_QUERY = gql`
   query MyQuery {
-    jobs {
-      company
-      description
-      employmentType
-      id
-      location
-      position
-      skillsRequired
+    eanalytics_orgs {
+      orgnm
+      orgid
+      locations {
+        addressline1
+        locationid
+        country
+      }
     }
   }
 `;
@@ -69,7 +69,7 @@ export const MainPage = () => {
                   ) : data ? (
                     <>
                       <Typography variant="h6">Sample Query:</Typography>
-                      {data?.jobs?.map((job: Job, index: number) => (
+                      {data?.eanalytics_orgs?.map((org: Eanalytics_Orgs, index: number) => (
                         <Card className={classes.recommendationCard} key={index}>
                           {/* <CardMedia
                             component="img"
@@ -79,11 +79,10 @@ export const MainPage = () => {
                             title={character.name || ''}
                           /> */}
                           <CardContent>
-                            <Typography variant="h6">
-                              {job.company}: {job.position}
+                            <Typography variant="h6">{org.orgnm}</Typography>
+                            <Typography>
+                              {org.locations[0].addressline1 + ', ' + org.locations[0].country + '. '}
                             </Typography>
-                            <Typography variant="subtitle1">{job.employmentType}</Typography>
-                            <Typography>{job.skillsRequired?.map((skill) => skill + ', ')}</Typography>
                           </CardContent>
                         </Card>
                       ))}
