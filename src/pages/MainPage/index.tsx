@@ -1,9 +1,10 @@
-import { gql, useQuery } from '@apollo/client';
+import { gql, useQuery, useReactiveVar } from '@apollo/client';
 import { Alert, AlertTitle, Card, CardContent, Container, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
-import React from 'react';
+import React, { useEffect } from 'react';
 import CustomCircularProgress from '../../components/CustomCircularProgress';
 import { Eanalytics_Orgs } from '../../models/GQLmodels';
+import { userSettingsVar } from '../../models/UserSettings';
 import { CustomTheme } from '../../theme';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -42,7 +43,17 @@ export const MainPage = () => {
       console.log(dat);
     },
   });
+
+  //this can be used to get data from the url, such as if an ID is included there
   // const params = useParams();
+
+  const userSettings = useReactiveVar(userSettingsVar);
+  useEffect(() => {
+    if (data && data.eanalytics_orgs && data.eanalytics_orgs.length) {
+      userSettingsVar({ ...userSettings, orgsLoaded: data.eanalytics_orgs.length });
+    }
+  }, [data]);
+
   return (
     <Grid container className={classes.root}>
       <Grid item xs={12}>
@@ -68,24 +79,29 @@ export const MainPage = () => {
                     </Alert>
                   ) : data ? (
                     <>
-                      <Typography variant="h6">Sample Query:</Typography>
-                      {data?.eanalytics_orgs?.map((org: Eanalytics_Orgs, index: number) => (
-                        <Card className={classes.recommendationCard} key={index}>
-                          {/* <CardMedia
+                      <Typography variant="h6">
+                        Loaded {userSettings.orgsLoaded} orgs for {userSettings.username}:
+                      </Typography>
+                      {data?.eanalytics_orgs?.map((org: Eanalytics_Orgs, index: number) =>
+                        org.locations?.length ? (
+                          <Card className={classes.recommendationCard} key={index}>
+                            {/* <CardMedia
                             component="img"
                             alt={character.name || ''}
                             height="140"
                             image={character.image || ''}
                             title={character.name || ''}
                           /> */}
-                          <CardContent>
-                            <Typography variant="h6">{org.orgnm}</Typography>
-                            <Typography>
-                              {org.locations[0].addressline1 + ', ' + org.locations[0].country + '. '}
-                            </Typography>
-                          </CardContent>
-                        </Card>
-                      ))}
+                            <CardContent>
+                              <Typography variant="h6">{org.orgnm}</Typography>
+
+                              <Typography>
+                                {org.locations[0]?.addressline1 + ', ' + org.locations[0]?.country + '. '}
+                              </Typography>
+                            </CardContent>
+                          </Card>
+                        ) : null,
+                      )}
                     </>
                   ) : (
                     <CustomCircularProgress color="secondary" text="Loading query" />
