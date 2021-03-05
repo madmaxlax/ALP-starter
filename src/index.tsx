@@ -6,13 +6,13 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import './assets/css/index.css';
 import ScrollToTop from './components/ScrollToTop';
-import { cacheMoney } from './models/cachemodel';
+import { cacheMoney } from './models/CacheModel';
 import Routes from './Routes';
 import * as serviceWorker from './serviceWorker';
 import theme from './theme';
 
 const client = new ApolloClient({
-  uri: 'https://rickandmortyapi.com/graphql',
+  uri: 'https://wealthy-dragon-32.hasura.app/v1/graphql',
   cache: cacheMoney,
 });
 
@@ -27,7 +27,7 @@ ReactDOM.render(
       </Router>
     </ThemeProvider>
   </ApolloProvider>,
-  document.querySelector('#root')
+  document.querySelector('#root'),
 );
 
 // If you want your app to work offline and load faster, you can change

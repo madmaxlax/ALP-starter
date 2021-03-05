@@ -1,9 +1,10 @@
-import { gql, useQuery } from '@apollo/client';
-import { Alert, AlertTitle, Card, CardContent, CardMedia, Container, Grid, Typography } from '@material-ui/core';
+import { gql, useQuery, useReactiveVar } from '@apollo/client';
+import { Alert, AlertTitle, Card, CardContent, Container, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
-import React from 'react';
+import React, { useEffect } from 'react';
 import CustomCircularProgress from '../../components/CustomCircularProgress';
-import { Character } from '../../models/types';
+import { Eanalytics_Orgs } from '../../models/GQLmodels';
+import { userSettingsVar } from '../../models/UserSettings';
 import { CustomTheme } from '../../theme';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -21,14 +22,15 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
   },
 }));
 
-const CHARACTERS_QUERY = gql`
-  query myQuery {
-    characters {
-      results {
-        id
-        name
-        gender
-        image
+const SAMPLE_QUERY = gql`
+  query MyQuery {
+    eanalytics_orgs {
+      orgnm
+      orgid
+      locations {
+        addressline1
+        locationid
+        country
       }
     }
   }
@@ -36,12 +38,22 @@ const CHARACTERS_QUERY = gql`
 
 export const MainPage = () => {
   const classes = useStyles();
-  const { error, data } = useQuery(CHARACTERS_QUERY, {
+  const { error, data } = useQuery(SAMPLE_QUERY, {
     onCompleted: (dat) => {
       console.log(dat);
     },
   });
+
+  //this can be used to get data from the url, such as if an ID is included there
   // const params = useParams();
+
+  const userSettings = useReactiveVar(userSettingsVar);
+  useEffect(() => {
+    if (data && data.eanalytics_orgs && data.eanalytics_orgs.length) {
+      userSettingsVar({ ...userSettings, orgsLoaded: data.eanalytics_orgs.length });
+    }
+  }, [data]);
+
   return (
     <Grid container className={classes.root}>
       <Grid item xs={12}>
@@ -67,21 +79,29 @@ export const MainPage = () => {
                     </Alert>
                   ) : data ? (
                     <>
-                      <Typography variant="h6">Rick and Morty Characters</Typography>
-                      {data?.characters?.results.map((character: Character, index: number) => (
-                        <Card className={classes.recommendationCard} key={index}>
-                          <CardMedia
+                      <Typography variant="h6">
+                        Loaded {userSettings.orgsLoaded} orgs for {userSettings.username}:
+                      </Typography>
+                      {data?.eanalytics_orgs?.map((org: Eanalytics_Orgs, index: number) =>
+                        org.locations?.length ? (
+                          <Card className={classes.recommendationCard} key={index}>
+                            {/* <CardMedia
                             component="img"
                             alt={character.name || ''}
                             height="140"
                             image={character.image || ''}
                             title={character.name || ''}
-                          />
-                          <CardContent>
-                            {character.name}: {character.gender}
-                          </CardContent>
-                        </Card>
-                      ))}
+                          /> */}
+                            <CardContent>
+                              <Typography variant="h6">{org.orgnm}</Typography>
+
+                              <Typography>
+                                {org.locations[0]?.addressline1 + ', ' + org.locations[0]?.country + '. '}
+                              </Typography>
+                            </CardContent>
+                          </Card>
+                        ) : null,
+                      )}
                     </>
                   ) : (
                     <CustomCircularProgress color="secondary" text="Loading query" />
