@@ -1,8 +1,8 @@
 import { gql, useQuery, useReactiveVar } from '@apollo/client';
-import { Alert, AlertTitle, Card, CardContent, Container, Grid, Typography } from '@material-ui/core';
+import { Card, CardContent, Container, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import React, { useEffect } from 'react';
-import CustomCircularProgress from '../../components/CustomCircularProgress';
+import CustomLoadingOrErrorPlaceholder from '../../components/CustomLoadingOrErrorPlaceholder';
 import { Eanalytics_Orgs } from '../../models/GQLmodels';
 import { userSettingsVar } from '../../models/UserSettings';
 import { CustomTheme } from '../../theme';
@@ -43,7 +43,6 @@ export const MainPage = () => {
       console.log(dat);
     },
   });
-
   //this can be used to get data from the url, such as if an ID is included there
   // const params = useParams();
 
@@ -53,7 +52,6 @@ export const MainPage = () => {
       userSettingsVar({ ...userSettings, orgsLoaded: data.eanalytics_orgs.length });
     }
   }, [data]);
-
   return (
     <Grid container className={classes.root}>
       <Grid item xs={12}>
@@ -72,7 +70,28 @@ export const MainPage = () => {
               <img src={'/img/placeholder-locationoverview.png'} alt="placeholder" style={{ width: '100%' }} />
               <Grid container spacing={2} justifyContent="space-between">
                 <Grid item xs={6}>
-                  {error ? (
+                  <CustomLoadingOrErrorPlaceholder data={data} error={error}>
+                    <div>
+                      <Typography variant="h6">
+                        Loaded {userSettings.orgsLoaded} orgs for {userSettings.username}:
+                      </Typography>
+                      {data?.eanalytics_orgs?.map((org: Eanalytics_Orgs, index: number) =>
+                        org.locations?.length ? (
+                          <Card className={classes.recommendationCard} key={index}>
+                            <CardContent>
+                              <Typography variant="h6">{org.orgnm}</Typography>
+
+                              <Typography>
+                                {org.locations[0]?.addressline1 + ', ' + org.locations[0]?.country + '. '}
+                              </Typography>
+                            </CardContent>
+                          </Card>
+                        ) : null,
+                      )}
+                    </div>
+                  </CustomLoadingOrErrorPlaceholder>
+
+                  {/* {error ? (
                     <Alert severity="error">
                       <AlertTitle>Error</AlertTitle>
                       {error}
@@ -85,13 +104,7 @@ export const MainPage = () => {
                       {data?.eanalytics_orgs?.map((org: Eanalytics_Orgs, index: number) =>
                         org.locations?.length ? (
                           <Card className={classes.recommendationCard} key={index}>
-                            {/* <CardMedia
-                            component="img"
-                            alt={character.name || ''}
-                            height="140"
-                            image={character.image || ''}
-                            title={character.name || ''}
-                          /> */}
+                            
                             <CardContent>
                               <Typography variant="h6">{org.orgnm}</Typography>
 
@@ -105,7 +118,7 @@ export const MainPage = () => {
                     </>
                   ) : (
                     <CustomCircularProgress color="secondary" text="Loading query" />
-                  )}
+                  )} */}
                 </Grid>
                 <Grid item xs={6}>
                   <img src={'/img/placeholder-learningaboutloss.png'} alt="placeholder" style={{ width: '100%' }} />
