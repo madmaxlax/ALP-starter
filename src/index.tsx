@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import './assets/css/index.css';
 import ScrollToTop from './components/ScrollToTop';
-import { cacheMoney } from './models/CacheModel';
+import { cacheMoney } from './models/cachemodel';
 import Routes from './Routes';
 import * as serviceWorker from './serviceWorker';
 import theme from './theme';

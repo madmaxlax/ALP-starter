@@ -41,6 +41,7 @@
     "eslint": "latest",
     "eslint-config-prettier": "latest",
     "eslint-plugin-prettier": "latest",
+    "eslint-plugin-react": "latest",
     "husky": "latest",
     "lint-staged": "latest",
     "prettier": "latest"

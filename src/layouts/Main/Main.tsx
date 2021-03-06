@@ -24,7 +24,7 @@ const Main = (props: ClassNameChildrenProps) => {
   const classes = useStyles();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const params = useParams() as any;
-  console.log(params);
+  console.log('page params', params);
 
   return (
     <div className={clsx(classes.mainRoot, className)}>

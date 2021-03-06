@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
@@ -164,7 +165,7 @@ export enum Eanalytics_Engineeringlocations_Select_Column {
   /** column name */
   Mfl = 'mfl',
   /** column name */
-  Updatedt = 'updatedt'
+  Updatedt = 'updatedt',
 }
 
 /** order by stddev() on columns of table "eanalytics.engineeringlocations" */
@@ -293,7 +294,7 @@ export enum Eanalytics_Engineeringrcmdtnresponses_Select_Column {
   /** column name */
   Rcmdtnresponse = 'rcmdtnresponse',
   /** column name */
-  Updatedt = 'updatedt'
+  Updatedt = 'updatedt',
 }
 
 /** order by stddev() on columns of table "eanalytics.engineeringrcmdtnresponses" */
@@ -346,7 +347,6 @@ export type Eanalytics_Engineeringrcmdtns = {
   rcmdtnnum?: Maybe<Scalars['String']>;
   updatedt: Scalars['timestamp'];
 };
-
 
 /** columns and relationships of "eanalytics.engineeringrcmdtns" */
 export type Eanalytics_EngineeringrcmdtnsEngineeringrcmdtnresponsesArgs = {
@@ -444,7 +444,7 @@ export enum Eanalytics_Engineeringrcmdtns_Select_Column {
   /** column name */
   Rcmdtnnum = 'rcmdtnnum',
   /** column name */
-  Updatedt = 'updatedt'
+  Updatedt = 'updatedt',
 }
 
 /** order by stddev() on columns of table "eanalytics.engineeringrcmdtns" */
@@ -512,7 +512,6 @@ export type Eanalytics_Locations = {
   updatedt: Scalars['timestamp'];
 };
 
-
 /** columns and relationships of "eanalytics.locations" */
 export type Eanalytics_LocationsEngineeringlocationsArgs = {
   distinct_on?: Maybe<Array<Eanalytics_Engineeringlocations_Select_Column>>;
@@ -521,7 +520,6 @@ export type Eanalytics_LocationsEngineeringlocationsArgs = {
   order_by?: Maybe<Array<Eanalytics_Engineeringlocations_Order_By>>;
   where?: Maybe<Eanalytics_Engineeringlocations_Bool_Exp>;
 };
-
 
 /** columns and relationships of "eanalytics.locations" */
 export type Eanalytics_LocationsEngineeringrcmdtnsArgs = {
@@ -653,7 +651,7 @@ export enum Eanalytics_Locations_Select_Column {
   /** column name */
   State = 'state',
   /** column name */
-  Updatedt = 'updatedt'
+  Updatedt = 'updatedt',
 }
 
 /** order by stddev() on columns of table "eanalytics.locations" */
@@ -724,7 +722,6 @@ export type Eanalytics_Orgs = {
   updatedt: Scalars['timestamp'];
 };
 
-
 /** columns and relationships of "eanalytics.orgs" */
 export type Eanalytics_OrgsLocationsArgs = {
   distinct_on?: Maybe<Array<Eanalytics_Locations_Select_Column>>;
@@ -768,9 +765,8 @@ export enum Eanalytics_Orgs_Select_Column {
   /** column name */
   Prospectclientnum = 'prospectclientnum',
   /** column name */
-  Updatedt = 'updatedt'
+  Updatedt = 'updatedt',
 }
-
 
 /** Boolean expression to compare columns of type "money". All fields are combined with logical 'AND'. */
 export type Money_Comparison_Exp = {
@@ -798,7 +794,7 @@ export enum Order_By {
   /** in descending order, nulls first */
   DescNullsFirst = 'desc_nulls_first',
   /** in descending order, nulls last */
-  DescNullsLast = 'desc_nulls_last'
+  DescNullsLast = 'desc_nulls_last',
 }
 
 export type Query_Root = {
@@ -832,7 +828,6 @@ export type Query_Root = {
   test_by_pk?: Maybe<Test>;
 };
 
-
 export type Query_RootEanalytics_EngineeringlocationsArgs = {
   distinct_on?: Maybe<Array<Eanalytics_Engineeringlocations_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -841,11 +836,9 @@ export type Query_RootEanalytics_EngineeringlocationsArgs = {
   where?: Maybe<Eanalytics_Engineeringlocations_Bool_Exp>;
 };
 
-
 export type Query_RootEanalytics_Engineeringlocations_By_PkArgs = {
   locationid: Scalars['Int'];
 };
-
 
 export type Query_RootEanalytics_EngineeringrcmdtnresponsesArgs = {
   distinct_on?: Maybe<Array<Eanalytics_Engineeringrcmdtnresponses_Select_Column>>;
@@ -855,11 +848,9 @@ export type Query_RootEanalytics_EngineeringrcmdtnresponsesArgs = {
   where?: Maybe<Eanalytics_Engineeringrcmdtnresponses_Bool_Exp>;
 };
 
-
 export type Query_RootEanalytics_Engineeringrcmdtnresponses_By_PkArgs = {
   rcmdtnid: Scalars['Int'];
 };
-
 
 export type Query_RootEanalytics_EngineeringrcmdtnsArgs = {
   distinct_on?: Maybe<Array<Eanalytics_Engineeringrcmdtns_Select_Column>>;
@@ -869,11 +860,9 @@ export type Query_RootEanalytics_EngineeringrcmdtnsArgs = {
   where?: Maybe<Eanalytics_Engineeringrcmdtns_Bool_Exp>;
 };
 
-
 export type Query_RootEanalytics_Engineeringrcmdtns_By_PkArgs = {
   rcmdtnid: Scalars['Int'];
 };
-
 
 export type Query_RootEanalytics_LocationsArgs = {
   distinct_on?: Maybe<Array<Eanalytics_Locations_Select_Column>>;
@@ -883,11 +872,9 @@ export type Query_RootEanalytics_LocationsArgs = {
   where?: Maybe<Eanalytics_Locations_Bool_Exp>;
 };
 
-
 export type Query_RootEanalytics_Locations_By_PkArgs = {
   locationid: Scalars['Int'];
 };
-
 
 export type Query_RootEanalytics_OrgsArgs = {
   distinct_on?: Maybe<Array<Eanalytics_Orgs_Select_Column>>;
@@ -897,16 +884,13 @@ export type Query_RootEanalytics_OrgsArgs = {
   where?: Maybe<Eanalytics_Orgs_Bool_Exp>;
 };
 
-
 export type Query_RootEanalytics_Orgs_By_PkArgs = {
   orgid: Scalars['Int'];
 };
 
-
 export type Query_RootJobArgs = {
   id: Scalars['Int'];
 };
-
 
 export type Query_RootTestArgs = {
   distinct_on?: Maybe<Array<Test_Select_Column>>;
@@ -915,7 +899,6 @@ export type Query_RootTestArgs = {
   order_by?: Maybe<Array<Test_Order_By>>;
   where?: Maybe<Test_Bool_Exp>;
 };
-
 
 export type Query_RootTest_By_PkArgs = {
   id: Scalars['uuid'];
@@ -949,7 +932,6 @@ export type Subscription_Root = {
   test_by_pk?: Maybe<Test>;
 };
 
-
 export type Subscription_RootEanalytics_EngineeringlocationsArgs = {
   distinct_on?: Maybe<Array<Eanalytics_Engineeringlocations_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -958,11 +940,9 @@ export type Subscription_RootEanalytics_EngineeringlocationsArgs = {
   where?: Maybe<Eanalytics_Engineeringlocations_Bool_Exp>;
 };
 
-
 export type Subscription_RootEanalytics_Engineeringlocations_By_PkArgs = {
   locationid: Scalars['Int'];
 };
-
 
 export type Subscription_RootEanalytics_EngineeringrcmdtnresponsesArgs = {
   distinct_on?: Maybe<Array<Eanalytics_Engineeringrcmdtnresponses_Select_Column>>;
@@ -972,11 +952,9 @@ export type Subscription_RootEanalytics_EngineeringrcmdtnresponsesArgs = {
   where?: Maybe<Eanalytics_Engineeringrcmdtnresponses_Bool_Exp>;
 };
 
-
 export type Subscription_RootEanalytics_Engineeringrcmdtnresponses_By_PkArgs = {
   rcmdtnid: Scalars['Int'];
 };
-
 
 export type Subscription_RootEanalytics_EngineeringrcmdtnsArgs = {
   distinct_on?: Maybe<Array<Eanalytics_Engineeringrcmdtns_Select_Column>>;
@@ -986,11 +964,9 @@ export type Subscription_RootEanalytics_EngineeringrcmdtnsArgs = {
   where?: Maybe<Eanalytics_Engineeringrcmdtns_Bool_Exp>;
 };
 
-
 export type Subscription_RootEanalytics_Engineeringrcmdtns_By_PkArgs = {
   rcmdtnid: Scalars['Int'];
 };
-
 
 export type Subscription_RootEanalytics_LocationsArgs = {
   distinct_on?: Maybe<Array<Eanalytics_Locations_Select_Column>>;
@@ -1000,11 +976,9 @@ export type Subscription_RootEanalytics_LocationsArgs = {
   where?: Maybe<Eanalytics_Locations_Bool_Exp>;
 };
 
-
 export type Subscription_RootEanalytics_Locations_By_PkArgs = {
   locationid: Scalars['Int'];
 };
-
 
 export type Subscription_RootEanalytics_OrgsArgs = {
   distinct_on?: Maybe<Array<Eanalytics_Orgs_Select_Column>>;
@@ -1014,11 +988,9 @@ export type Subscription_RootEanalytics_OrgsArgs = {
   where?: Maybe<Eanalytics_Orgs_Bool_Exp>;
 };
 
-
 export type Subscription_RootEanalytics_Orgs_By_PkArgs = {
   orgid: Scalars['Int'];
 };
-
 
 export type Subscription_RootTestArgs = {
   distinct_on?: Maybe<Array<Test_Select_Column>>;
@@ -1027,7 +999,6 @@ export type Subscription_RootTestArgs = {
   order_by?: Maybe<Array<Test_Order_By>>;
   where?: Maybe<Test_Bool_Exp>;
 };
-
 
 export type Subscription_RootTest_By_PkArgs = {
   id: Scalars['uuid'];
@@ -1065,9 +1036,8 @@ export enum Test_Select_Column {
   /** column name */
   Key = 'key',
   /** column name */
-  Value = 'value'
+  Value = 'value',
 }
-
 
 /** Boolean expression to compare columns of type "timestamp". All fields are combined with logical 'AND'. */
 export type Timestamp_Comparison_Exp = {
@@ -1081,7 +1051,6 @@ export type Timestamp_Comparison_Exp = {
   _neq?: Maybe<Scalars['timestamp']>;
   _nin?: Maybe<Array<Scalars['timestamp']>>;
 };
-
 
 /** Boolean expression to compare columns of type "uuid". All fields are combined with logical 'AND'. */
 export type Uuid_Comparison_Exp = {

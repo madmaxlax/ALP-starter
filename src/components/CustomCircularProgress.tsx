@@ -14,7 +14,7 @@ interface GWCircularProgressProps extends CircularProgressProps {
 }
 
 const CustomCircularProgress = (props: GWCircularProgressProps) => {
-  const { text, className } = props;
+  const { text = 'loading', className } = props;
   const classes = useStyles();
 
   return (
