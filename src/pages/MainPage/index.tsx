@@ -4,6 +4,7 @@ import { Card, CardContent, Container, Grid, Typography } from '@material-ui/cor
 import { makeStyles } from '@material-ui/styles';
 import React, { useEffect } from 'react';
 import CustomLoadingOrErrorPlaceholder from '../../components/CustomLoadingOrErrorPlaceholder';
+import TypeCardHeader from '../../components/Typography/CardHeader';
 import { Eanalytics_Orgs } from '../../models/GQLmodels';
 import { userSettingsVar } from '../../models/UserSettings';
 import { CustomTheme } from '../../theme';
@@ -72,9 +73,19 @@ export const MainPage = () => {
               <Grid container spacing={2} justifyContent="space-between">
                 <Grid item xs={6}>
                   <CustomLoadingOrErrorPlaceholder data={data} error={error}>
+                    <TypeCardHeader>Generic Card Header example </TypeCardHeader>
+
+                    <Card className={classes.recommendationCard}>
+                      <CardContent>
+                        <Typography variant="h6">Card Header</Typography>
+
+                        <Typography>Card content</Typography>
+                      </CardContent>
+                    </Card>
                     <div>
-                      <Typography variant="h6">
-                        Loaded {userSettings.orgsLoaded} orgs for {userSettings.username}:
+                      <Typography variant="CardHeader">
+                        Real Data: Loaded {userSettings.orgsLoaded}
+                        orgs for {userSettings.username}:
                       </Typography>
                       {data?.eanalytics_orgs?.map((org: Eanalytics_Orgs, index: number) =>
                         org.locations?.length ? (

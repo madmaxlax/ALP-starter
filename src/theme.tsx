@@ -34,18 +34,34 @@ const theme = createMuiTheme({
     allVariants: {
       color: '#444444',
     },
+
     //  fontFamily:''
   },
   components: {
+    MuiTypography: {
+      variants: [
+        {
+          // note: Material UI v5 is still working on this, as of Feb 2021 you need to use this variant by saying variant={"custom" as any}
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          props: { variant: 'CardHeader' as any },
+          style: {
+            display: 'block',
+            color: '#444444',
+            fontSize: 20,
+            fontWeight: 500,
+          },
+        },
+      ],
+    },
     MuiButton: {
       //custom variants
       variants: [
         {
-          // note: Material UI v5 is still working on this, so it doesn't work as of Feb 2021
+          // note: Material UI v5 is still working on this, as of Feb 2021 you need to use this variant by saying variant={"custom" as never}
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           props: { variant: 'custom' as any },
           style: {
-            backgroundColor: '#00acee',
+            backgroundColor: 'black',
             color: '#FFFFFF',
             '&:hover': {
               backgroundColor: '#007cad',
@@ -56,6 +72,12 @@ const theme = createMuiTheme({
     },
   },
 }) as CustomTheme;
+
+declare module '@material-ui/core/Typography/Typography' {
+  interface TypographyPropsVariantOverrides {
+    CardHeader: true;
+  }
+}
 
 theme.customValues = {
   primaryFontFamily: 'Roboto',
