@@ -4,8 +4,8 @@ import { CustomError } from './CustomError';
 
 interface LoadingOrErrorProps extends PropsWithChildren<unknown> {
   loading?: boolean;
-  error?: any;
-  data: any;
+  error?: unknown;
+  data: unknown;
   loadingMessage?: string;
   errorMessage?: string;
 }

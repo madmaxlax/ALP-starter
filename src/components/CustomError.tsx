@@ -9,8 +9,10 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
 }));
 
 interface CustomErrorProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   errorToDisplay?: any;
   title?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   fullError?: any;
   severity?: 'error' | 'warning' | 'info' | 'success';
 }

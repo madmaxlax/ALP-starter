@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { gql, useQuery, useReactiveVar } from '@apollo/client';
 import { Card, CardContent, Container, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
